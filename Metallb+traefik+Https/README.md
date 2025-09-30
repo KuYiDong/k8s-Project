@@ -32,7 +32,7 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-  - 192.168.163.100-192.168.163.200
+  - # 현재 본인 IP 대역과 동일한 IP range 지정
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
