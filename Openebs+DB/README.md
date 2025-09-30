@@ -109,7 +109,7 @@ spec:
 
 ### 4.Headless
 
-'''
+```
 apiVersion: v1
 kind: Service
 metadata:
@@ -123,7 +123,8 @@ spec:
   clusterIP: None   # 핵심
   selector:
     app: db-deployment
-'''
+```
+
 
 
 
