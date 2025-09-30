@@ -155,9 +155,7 @@ spec:
 
 ### 3. Nginx 배포 및 ConfigMap 연결
 
-- 설정 파일 참고고
-
-  
+- 설정 파일 참고
 - Deployment와 Service 설정
 - Traefik IngressRoute + Middleware 연결
-EOF
+  
