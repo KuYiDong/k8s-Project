@@ -3,12 +3,12 @@
 MetalLB 설치 및 설정 가이드입니다.
 
 ## 1. 설치
-\`\`\`bash
+```
 helm repo add metallb https://metallb.github.io/metallb
 helm repo update
 kubectl create namespace metallb-system
 helm install metallb metallb/metallb -n metallb-system
-\`\`\`
+```
 
 ## 2. IP 풀 + ARP 광고
 \`\`\`yaml
