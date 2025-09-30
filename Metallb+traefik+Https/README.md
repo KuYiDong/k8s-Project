@@ -5,23 +5,26 @@
 - Metallb: 로드밸런서, 외부에서 Metallb의 VIP 을 통해서 서비스를 접근하게 한다.
 - Traefik: ingressroute 서비스, Prefix 별 라우팅을 지원한다. 대시보드 UI를 지원한다.
 
-해당 구성의 동작은 아래와 같다 
+해당 구성의 동작은 아래와 같습니다.
 
 - 사용자 -> 접근 https://VIP/apple
 - Metallb -> traefik -> nginx
 
+해당 구성들을 설정하기 전 각 서비스에 대하여 namespace를 생성하길 바랍니다. 
 
 ## MetalLB
 
 MetalLB 설치 및 설정 가이드입니다.
 
+
 ### 1. 설치
 ```
+kubectl create namespace metallb-system
 helm repo add metallb https://metallb.github.io/metallb
 helm repo update
-kubectl create namespace metallb-system
 helm install metallb metallb/metallb -n metallb-system
 ```
+
 
 ### 2. IP 풀 + ARP 광고
 ```
@@ -40,6 +43,7 @@ metadata:
   name: default
   namespace: metallb-system
 ```
+
 
 ### 3. kube-proxy IPVS 설정
 - ConfigMap 확인
@@ -88,13 +92,15 @@ EOF
 
 Traefik Ingress Controller 설치 및 Dashboard 설정 가이드입니다.
 
+
 ### 설치
 ```
+kubectl create namespace traefik
 helm repo add traefik https://traefik.github.io/charts
 helm repo update
-kubectl create namespace traefik
-helm install traefik traefik/traefik -f my-values.yaml
+helm install traefik traefik/traefik -f my-values.yaml -n traefik
 ```
+
 
 ### values.yaml 예시
 ```
@@ -110,19 +116,17 @@ Deployment:
   type: DaemonSet
 ```
 
-### 서비스 배포
-```
-helm install traefik -f value.yaml .
-```
 
 ## Nginx + HTTPS
 
 Traefik과 연동된 Nginx 배포 및 HTTPS 설정 가이드입니다.
 
+
 ### 1. Cert-Manager 설치
 ```
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.12.0/cert-manager.yaml
 ```
+
 
 ### 2. Self-Signed Issuer 생성
 ```
@@ -150,7 +154,10 @@ spec:
 ```
 
 ### 3. Nginx 배포 및 ConfigMap 연결
-- apple.html, banana.html, cherry.html 생성
+
+- 설정 파일 참고고
+
+  
 - Deployment와 Service 설정
 - Traefik IngressRoute + Middleware 연결
 EOF
