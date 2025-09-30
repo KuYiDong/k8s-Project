@@ -11,7 +11,7 @@ helm install metallb metallb/metallb -n metallb-system
 ```
 
 ## 2. IP 풀 + ARP 광고
-\`\`\`yaml
+```
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
@@ -26,7 +26,7 @@ kind: L2Advertisement
 metadata:
   name: default
   namespace: metallb-system
-\`\`\`
+```
 
 ## 3. kube-proxy IPVS 설정
 - ConfigMap 확인
