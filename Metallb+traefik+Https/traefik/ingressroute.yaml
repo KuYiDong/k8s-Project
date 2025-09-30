@@ -1,0 +1,37 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`192.168.163.101`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: nginx
+          port: 80
+    - match: Host(`192.168.163.101`) && PathPrefix(`/apple`)
+      kind: Rule
+      middlewares:
+        - name: strip-prefix
+      services:
+        - name: apple
+          port: 80
+    - match: Host(`192.168.163.101`) && PathPrefix(`/banana`)
+      kind: Rule
+      middlewares:
+        - name: strip-prefix
+      services:
+        - name: banana
+          port: 80
+    - match: Host(`192.168.163.101`) && PathPrefix(`/cherry`)
+      kind: Rule
+      middlewares:
+        - name: strip-prefix
+      services:
+        - name: cherry
+          port: 80
+  tls:
+    secretName: traefik-tls

@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apple
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: apple
+  template:
+    metadata:
+      labels:
+        app: apple
+    spec:
+      containers:
+        - name: apple-nginx
+          image: nginx:stable
+          ports:
+          - containerPort: 80
+          volumeMounts:
+          - name: nginx-index
+            mountPath: /usr/share/nginx/html/index.html
+            subPath: apple.html
+      volumes:
+      - name: nginx-index
+        configMap:
+          name: nginx-index
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banana
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: banana
+  template:
+    metadata:
+      labels:
+        app: banana
+    spec:
+      containers:
+        - name: banana-nginx
+          image: nginx:stable
+          ports:
+          - containerPort: 80
+          volumeMounts:
+          - name: nginx-index
+            mountPath: /usr/share/nginx/html/index.html
+            subPath: banana.html
+      volumes:
+      - name: nginx-index
+        configMap:
+          name: nginx-index
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cherry
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cherry
+  template:
+    metadata:
+      labels:
+        app: cherry
+    spec:
+      containers:
+        - name: cherry-bginx
+          image: nginx:stable
+          ports:
+          - containerPort: 80
+          volumeMounts:
+          - name: nginx-index
+            mountPath: /usr/share/nginx/html/
+            subPath: cherry.html
+      volumes:
+      - name: nginx-index
+        configMap:
+          name: nginx-index

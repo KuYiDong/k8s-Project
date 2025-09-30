@@ -1,0 +1,23 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: selfsigned-issuer
+  namespace: traefik
+spec:
+  selfSigned: {}
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: traefik-cert
+  namespace: traefik
+spec:
+  secretName: traefik-tls
+  issuerRef:
+    name: selfsigned-issuer
+    kind: Issuer
+  commonName: 192.168.163.240
+  dnsNames:
+    - 192.168.163.240
+
