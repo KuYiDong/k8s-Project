@@ -48,9 +48,9 @@ kubectl -n kube-system get configmap kube-proxy -o yaml
 ```
 
 - IPVS 모드 적용
-'''
-mode ipvs
-'''
+```
+mode: ipvs
+```
 
 ## Traefik
 
