@@ -5,6 +5,11 @@
 - Metallb: 로드밸런서, 외부에서 Metallb의 VIP 을 통해서 서비스를 접근하게 한다.
 - Traefik: ingressroute 서비스, Prefix 별 라우팅을 지원한다. 대시보드 UI를 지원한다.
 
+해당 구성의 동작은 아래와 같다 
+
+- 사용자 -> 접근 https://VIP/apple
+- Metallb -> traefik -> nginx
+
 
 ## MetalLB
 
