@@ -33,9 +33,9 @@ openebs-hostpath   openebs.io/local   Delete          WaitForFirstConsumer   fal
 
 ### 3.기본 StorageClass로 변경
 
-'''
+```
 kubectl patch storageclass openebs-hostpath -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
-'''
+```
 
 ## DataBase
 
@@ -126,6 +126,7 @@ spec:
   selector:
     app: db-deployment
 ```
+
 
 
 
