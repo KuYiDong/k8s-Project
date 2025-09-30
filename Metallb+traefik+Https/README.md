@@ -52,6 +52,38 @@ kubectl -n kube-system get configmap kube-proxy -o yaml
 mode: ipvs
 ```
 
+- 각 노드 IPVS 모듈 활성화
+```
+sudo modprobe ip_vs
+sudo modprobe ip_vs_rr
+sudo modprobe ip_vs_wrr
+sudo modprobe ip_vs_sh
+sudo modprobe nf_conntrack
+```
+
+- 재부팅 후 자동 로드 가능하게 설정
+```
+sudo tee /etc/modules-load.d/ipvs.conf <<EOF
+ip_vs
+ip_vs_rr
+ip_vs_wrr
+ip_vs_sh
+nf_conntrack
+EOF
+```
+
+- kube-proxy 재시작
+```
+sudo tee /etc/modules-load.d/ipvs.conf <<EOF
+ip_vs
+ip_vs_rr
+ip_vs_wrr
+ip_vs_sh
+nf_conntrack
+EOF
+```
+
+
 ## Traefik
 
 Traefik Ingress Controller 설치 및 Dashboard 설정 가이드입니다.
