@@ -3,7 +3,9 @@
 해당 서비스들의 기능들의 대해 소개합니다.
 
 - **Openebs**: Kubernetes 내부에서 동적 스토리지 프로비저닝을 제공하는 Cloud Native Storage(CNS) 솔루션, StorageClass를 생성하여 자동으로 PV를 할당한
-- **Stateful**: 상태가 필요한(Stateful) 애플리케이션을 안정적으로 배포/운영하기 위한 리소스, 데이터 베이스마다 고유의 PVC 할당 
+  
+- **Stateful**: 상태가 필요한(Stateful) 애플리케이션을 안정적으로 배포/운영하기 위한 리소스, 데이터 베이스마다 고유의 PVC 할당
+  
 - **headless**: Pod들을 개별적으로 DNS 이름으로 직접 접근 가능하게 해주는 서비스 타입
 
 
@@ -124,6 +126,7 @@ spec:
   selector:
     app: db-deployment
 ```
+
 
 
 
