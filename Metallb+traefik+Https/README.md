@@ -1,10 +1,10 @@
 # Metallb+traefik+Https
 
-# MetalLB
+## MetalLB
 
 MetalLB 설치 및 설정 가이드입니다.
 
-## 1. 설치
+### 1. 설치
 ```
 helm repo add metallb https://metallb.github.io/metallb
 helm repo update
@@ -12,7 +12,7 @@ kubectl create namespace metallb-system
 helm install metallb metallb/metallb -n metallb-system
 ```
 
-## 2. IP 풀 + ARP 광고
+### 2. IP 풀 + ARP 광고
 ```
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
@@ -30,7 +30,7 @@ metadata:
   namespace: metallb-system
 ```
 
-## 3. kube-proxy IPVS 설정
+### 3. kube-proxy IPVS 설정
 - ConfigMap 확인
 ```
 kubectl -n kube-system get configmap kube-proxy -o yaml
@@ -38,11 +38,11 @@ kubectl -n kube-system get configmap kube-proxy -o yaml
 
 - IPVS 모드 적용
 
-# Traefik
+## Traefik
 
 Traefik Ingress Controller 설치 및 Dashboard 설정 가이드입니다.
 
-## 설치
+### 설치
 ```
 helm repo add traefik https://traefik.github.io/charts
 helm repo update
@@ -50,7 +50,7 @@ kubectl create namespace traefik
 helm install traefik traefik/traefik -f my-values.yaml
 ```
 
-## values.yaml 예시
+### values.yaml 예시
 ```
 service:
   type: LoadBalancer
@@ -64,21 +64,21 @@ Deployment:
   type: DaemonSet
 ```
 
-## 서비스 배포
+### 서비스 배포
 ```
 helm install traefik -f value.yaml .
 ```
 
-# Nginx + HTTPS
+## Nginx + HTTPS
 
 Traefik과 연동된 Nginx 배포 및 HTTPS 설정 가이드입니다.
 
-## 1. Cert-Manager 설치
+### 1. Cert-Manager 설치
 ```
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.12.0/cert-manager.yaml
 ```
 
-## 2. Self-Signed Issuer 생성
+### 2. Self-Signed Issuer 생성
 ```
 apiVersion: cert-manager.io/v1
 kind: Issuer
@@ -103,7 +103,7 @@ spec:
     - # VIP
 ```
 
-## 3. Nginx 배포 및 ConfigMap 연결
+### 3. Nginx 배포 및 ConfigMap 연결
 - apple.html, banana.html, cherry.html 생성
 - Deployment와 Service 설정
 - Traefik IngressRoute + Middleware 연결
