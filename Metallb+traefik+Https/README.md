@@ -1,5 +1,11 @@
 # Metallb+traefik+Https
 
+해당 서비스들의 기능들의 대해 소개합니다.
+
+- Metallb: 로드밸런서, 외부에서 Metallb의 VIP 을 통해서 서비스를 접근하게 한다.
+- Traefik: ingressroute 서비스, Prefix 별 라우팅을 지원한다. 대시보드 UI를 지원한다.
+
+
 ## MetalLB
 
 MetalLB 설치 및 설정 가이드입니다.
@@ -37,6 +43,9 @@ kubectl -n kube-system get configmap kube-proxy -o yaml
 ```
 
 - IPVS 모드 적용
+'''
+mode ipvs
+'''
 
 ## Traefik
 
